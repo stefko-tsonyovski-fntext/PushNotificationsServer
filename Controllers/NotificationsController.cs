@@ -31,12 +31,12 @@ namespace PWAPushNotificationsServer.Controllers
             try
             {
                 await webPushClient.SendNotificationAsync(subscription, "payload", vapidDetails);
-                return this.Ok();
+                return this.Ok(subscription);
                 //await webPushClient.SendNotificationAsync(subscription, "payload", gcmAPIKey);
             }
             catch (WebPushException exception)
             {
-                return this.BadRequest();
+                return this.BadRequest(exception);
             }
         }
     }
