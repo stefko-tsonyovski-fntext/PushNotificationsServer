@@ -5,10 +5,10 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: "CrossOriginRequestPolicy", policy =>
     {
         policy
-        //.WithOrigins("http://localhost:3000", "https://admirable-twilight-bc7a4a.netlify.app")
-        .AllowAnyOrigin()
+        .WithOrigins("http://localhost:3000", "https://admirable-twilight-bc7a4a.netlify.app")
         .AllowAnyHeader()
-        .AllowAnyMethod();
+        .AllowAnyMethod()
+        .AllowCredentials();
     });
 });
 
