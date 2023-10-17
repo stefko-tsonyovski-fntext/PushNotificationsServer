@@ -1,0 +1,6 @@
+﻿services:
+  web_api:
+    image: push_notifications_api
+    container_name: push_notifications_api_application
+    ports:
+      - "5000:80"
