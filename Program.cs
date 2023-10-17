@@ -1,5 +1,16 @@
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "CrossOriginRequestPolicy", policy =>
+    {
+        policy
+        .WithOrigins("http://localhost:3000", "https://admirable-twilight-bc7a4a.netlify.app")
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -19,6 +30,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors("CrossOriginRequestPolicy");
 
 app.MapControllers();
 
