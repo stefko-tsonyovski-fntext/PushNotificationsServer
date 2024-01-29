@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PWAPushNotificationsServer.Data;
 using PWAPushNotificationsServer.Models;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
 using WebPush;
 
 namespace PWAPushNotificationsServer.Controllers
@@ -70,9 +71,17 @@ namespace PWAPushNotificationsServer.Controllers
 
                 var webPushClient = new WebPushClient();
 
+                PayloadDto payloadDto = new PayloadDto
+                {
+                    Title = notificationDto.Title,
+                    Message = notificationDto.Message,
+                };
+
+                string payload = JsonSerializer.Serialize(payloadDto);
+
                 try
                 {
-                    await webPushClient.SendNotificationAsync(subscriptionToBePushed, "Hello from .NET 6", vapidDetails);
+                    await webPushClient.SendNotificationAsync(subscriptionToBePushed, payload, vapidDetails);
                     // await webPushClient.SendNotificationAsync(subscription, "payload", gcmAPIKey);
                 }
                 catch (WebPushException exception)
