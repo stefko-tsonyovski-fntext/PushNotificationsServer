@@ -62,10 +62,10 @@ namespace PWAPushNotificationsServer.Controllers
 
             foreach (var subscription in subscriptions)
             {
-                var subject = @"mailto:stefko.noisy.boy@gmail.com";
+                // var subject = @"mailto:stefko.noisy.boy@gmail.com";
 
                 var subscriptionToBePushed = new PushSubscription(subscription.Endpoint, subscription.P256dh, subscription.Auth);
-                var vapidDetails = new VapidDetails(subject, this.publicVapidKey, this.privateVapidKey);
+                var vapidDetails = new VapidDetails("", this.publicVapidKey, this.privateVapidKey);
 
                 // var gcmAPIKey = @"[your key here]";
 
